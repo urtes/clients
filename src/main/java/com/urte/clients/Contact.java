@@ -13,7 +13,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long customerId;
+    private long clientId;
     private String firstName;
     private String lastName;
     private String company;
