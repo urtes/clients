@@ -21,11 +21,30 @@ public class ClientController {
                                      @RequestParam("sortByColumn") String sortByColumn,
                                      @RequestParam(value = "sortingOrder", defaultValue = "ASC") String sortingOrder) {
 
-        Sort.Direction sort = sortingOrder.equals("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Sort.Direction sort = sortingOrder.toUpperCase().equals("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC;
         List<Contact> contacts = new ArrayList();
 
-        if (sortByColumn.toLowerCase().equals("firstname")) {
-            contacts = contactService.getSortedByFirstName(sort, clientId);
+        switch (sortByColumn.toLowerCase()) {
+            case "firstname":
+                contacts = contactService.getSortedByFirstName(sort, clientId);
+                break;
+            case "lastname":
+                contacts = contactService.getSortedByLastName(sort, clientId);
+                break;
+            case "company":
+                contacts = contactService.getSortedByCompany(sort, clientId);
+                break;
+            case "address":
+                contacts = contactService.getSortedByAddress(sort, clientId);
+                break;
+            case "phone":
+                contacts = contactService.getSortedByPhone(sort, clientId);
+                break;
+            case "birthday":
+                contacts = contactService.getSortedByBirthday(sort, clientId);
+                break;
+            default:
+                contacts = contactService.getSortedByFirstName(sort, clientId);
         }
 
         return contacts;

@@ -28,6 +28,10 @@ public class ContactService {
         return contactRepository.findByClientId(clientId, sortByAddress(sortDirection));
     }
 
+    public List<Contact> getSortedByPhone(Sort.Direction sortDirection, Long clientId) {
+        return contactRepository.findByClientId(clientId, sortByPhone(sortDirection));
+    }
+
     public List<Contact> getSortedByBirthday(Sort.Direction sortDirection, Long clientId) {
         return contactRepository.findByClientId(clientId, sortByBirthday(sortDirection));
     }
@@ -46,6 +50,10 @@ public class ContactService {
 
     private Sort sortByAddress(Sort.Direction sortDirection) {
         return new Sort(sortDirection, "address");
+    }
+
+    private Sort sortByPhone(Sort.Direction sortDirection) {
+        return new Sort(sortDirection, "phone");
     }
 
     private Sort sortByBirthday(Sort.Direction sortDirection) {
